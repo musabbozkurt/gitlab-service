@@ -1,0 +1,14 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+feign:
+  services:
+    gitlab-client:
+      url: ${GITLAB_API_URL:https://gitlab.com/api/v4}
+      private-token: ${GITLAB_PRIVATE_TOKEN:glpat-VvaQTMLYwUpKAiqzC7jq}
+      path-with-namespace:
+      max-number-of-project: 30
+
+

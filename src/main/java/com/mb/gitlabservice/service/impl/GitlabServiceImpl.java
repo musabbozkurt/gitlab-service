@@ -92,13 +92,14 @@ public class GitlabServiceImpl implements GitlabService {
     @Override
     public List<ApiMergeRequestResponse> createMergeRequests(ApiMergeRequestCreateRequest apiMergeRequestCreateRequest) {
         List<ApiMergeRequestResponse> mergeRequests = new ArrayList<>();
-        getProjects(ApiProjectFilter.builder().visibility("private").build()).forEach(apiProjectResponse -> {
-            try {
-                mergeRequests.add(gitlabClient.createMergeRequest(apiProjectResponse.getId(), apiMergeRequestCreateRequest));
-            } catch (Exception e) {
-                log.error("Exception occurred while creating merge requests. Exception: {}", ExceptionUtils.getStackTrace(e));
-            }
-        });
+        compareBranches(new ApiCompareBranchFilter(apiMergeRequestCreateRequest.getSource_branch(), apiMergeRequestCreateRequest.getTarget_branch(), true))
+                .forEach(apiProjectResponse -> {
+                    try {
+                        mergeRequests.add(gitlabClient.createMergeRequest(apiProjectResponse.getId(), apiMergeRequestCreateRequest));
+                    } catch (Exception e) {
+                        log.error("Exception occurred while creating merge requests. Exception: {}", ExceptionUtils.getStackTrace(e));
+                    }
+                });
         return mergeRequests;
     }
 

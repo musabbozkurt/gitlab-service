@@ -23,4 +23,7 @@ public class ApiMergeRequestCreateRequest {
 
     @NotNull
     private String title;
+
+    @ApiModelProperty("Assignee id.")
+    private String assignee_id;
 }

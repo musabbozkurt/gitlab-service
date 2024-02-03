@@ -1,6 +1,6 @@
 package com.mb.gitlabservice.client.response;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.List;
@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 public class ApiCompareResponse {
 
-    @ApiModelProperty(value = "List of differences")
+    @Schema(description = "List of differences")
     private List<Object> diffs;
 }

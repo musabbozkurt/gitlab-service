@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
-import java.util.Date;
-
 @Slf4j
 @RequiredArgsConstructor
 public class GitlabErrorDecoder implements ErrorDecoder {
@@ -22,7 +20,7 @@ public class GitlabErrorDecoder implements ErrorDecoder {
 
         if (HttpStatus.valueOf(response.status()) == HttpStatus.UNAUTHORIZED) {
             log.warn("UNAUTHORIZED Gitlab request.");
-            throw new RetryableException(response.status(), exception.getMessage(), response.request().httpMethod(), exception, new Date(System.currentTimeMillis()), response.request());
+            throw new RetryableException(response.status(), exception.getMessage(), response.request().httpMethod(), System.currentTimeMillis(), response.request());
         }
 
         return exception;

@@ -1,11 +1,10 @@
 package com.mb.gitlabservice.client.request;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -13,11 +12,11 @@ import javax.validation.constraints.NotNull;
 public class ApiCompareBranchFilter {
 
     @NotNull
-    @ApiModelProperty("Source branch name.")
+    @Schema(description = "Source branch name.")
     private String from;
 
     @NotNull
-    @ApiModelProperty("Target branch name.")
+    @Schema(description = "Target branch name.")
     private String to;
 
     private boolean straight;

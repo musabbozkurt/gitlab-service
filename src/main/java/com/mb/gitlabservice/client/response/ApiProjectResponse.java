@@ -1,19 +1,19 @@
 package com.mb.gitlabservice.client.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 public class ApiProjectResponse {
 
-    @ApiModelProperty(value = "Gitlab project id. Example: 1234")
+    @Schema(description = "Gitlab project id. Example: 1234")
     private long id;
 
-    @ApiModelProperty(value = "Gitlab project name.")
+    @Schema(description = "Gitlab project name.")
     private String name;
 
-    @ApiModelProperty(value = "Path with namespace.")
+    @Schema(description = "Path with namespace.")
     @JsonProperty("path_with_namespace")
     private String pathWithNamespace;
 }

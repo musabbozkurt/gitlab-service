@@ -1,12 +1,11 @@
 package com.mb.gitlabservice.service.impl;
 
-import com.google.common.collect.Lists;
+import com.mb.gitlabservice.client.GitlabClient;
 import com.mb.gitlabservice.client.config.GitlabConfigProperties;
 import com.mb.gitlabservice.client.request.*;
 import com.mb.gitlabservice.client.response.ApiCompareResponse;
 import com.mb.gitlabservice.client.response.ApiMergeRequestResponse;
 import com.mb.gitlabservice.client.response.ApiProjectResponse;
-import com.mb.gitlabservice.client.GitlabClient;
 import com.mb.gitlabservice.service.GitlabService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +59,7 @@ public class GitlabServiceImpl implements GitlabService {
 
     @Override
     public List<ApiProjectResponse> compareBranches(ApiCompareBranchFilter gitlabFilter) {
-        List<ApiProjectResponse> apiProjectResponses = Lists.newArrayList();
+        List<ApiProjectResponse> apiProjectResponses = new ArrayList<>();
         getProjects(ApiProjectFilter.builder().visibility("private").build()).forEach(apiProjectResponse -> {
             ApiCompareResponse apiCompareResponse;
             try {
@@ -86,6 +85,7 @@ public class GitlabServiceImpl implements GitlabService {
                 log.error("Exception occurred while fetching merge requests. Exception: {}", ExceptionUtils.getStackTrace(e));
             }
         });
+        mergeRequests.stream().map(ApiMergeRequestResponse::getWebUrl).forEach(log::info);
         return mergeRequests;
     }
 

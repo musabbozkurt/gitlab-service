@@ -1,11 +1,10 @@
 package com.mb.gitlabservice.client.request;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
 
 // https://docs.gitlab.com/ee/api/merge_requests.html#create-mr
 @Data
@@ -14,16 +13,16 @@ import javax.validation.constraints.NotNull;
 public class ApiMergeRequestCreateRequest {
 
     @NotNull
-    @ApiModelProperty("Source branch name.")
+    @Schema(description = "Source branch name.")
     private String source_branch;
 
     @NotNull
-    @ApiModelProperty("Target branch name.")
+    @Schema(description = "Target branch name.")
     private String target_branch;
 
     @NotNull
     private String title;
 
-    @ApiModelProperty("Assignee id.")
+    @Schema(description = "Assignee id.")
     private String assignee_id;
 }
